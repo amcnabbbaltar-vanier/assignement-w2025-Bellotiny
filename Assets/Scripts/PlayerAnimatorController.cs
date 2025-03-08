@@ -20,6 +20,6 @@ public class PlayerAnimatorController : MonoBehaviour
     {
         animator.SetFloat("CharacterSpeed", rb.velocity.magnitude);
         animator.SetBool("IsGrounded", movement.IsGrounded);
-
+        //animator.SetBool("doFlip", movement.doFlip);
     }
 }

@@ -26,6 +26,7 @@ public class CharacterMovement : MonoBehaviour
     private float moveX; // Stores horizontal movement input (A/D or Left/Right Arrow)
     private float moveZ; // Stores vertical movement input (W/S or Up/Down Arrow)
     private bool jumpRequest; // Flag to check if the player requested a jump
+    private bool flipRequest; // Flag to check if the player requested do flip
     private Vector3 moveDirection; // Stores the calculated movement direction
 
     // ============================== Animation Variables ==============================
@@ -44,6 +45,7 @@ public class CharacterMovement : MonoBehaviour
     /// Checks if the player is currently holding the "Run" button.
     /// </summary>
     private bool IsRunning => Input.GetButton("Run");
+    public bool doFlip;
 
     // ============================== Unity Built-in Methods ==============================
 
@@ -106,7 +108,13 @@ public class CharacterMovement : MonoBehaviour
         if (Input.GetButtonDown("Jump"))
         {
             jumpRequest = true;
+            // if (Input.GetButtonDown("Jump"))
+            // {
+            //     flipRequest = true;
+            // }
         }
+
+        
     }
 
     // ============================== Movement Handling ==============================
@@ -162,6 +170,12 @@ public class CharacterMovement : MonoBehaviour
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse); // Apply force upwards
             jumpRequest = false; // Reset jump request after applying jump
         }
+
+        // if (flipRequest)
+        // {
+        //     rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse); // Apply force upwards
+        //     flipRequest = false; // Reset jump request after applying jump
+        // }
     }
 
     /// <summary>

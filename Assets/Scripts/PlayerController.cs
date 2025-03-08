@@ -7,24 +7,25 @@ public class PlayerController : MonoBehaviour
     //private float health = 100;
     private PlayerHealth playerHealth; 
     private Animator animator;
-    private ParticleSystem hitParticles;
-    private AudioSource audioSource;
+    private ParticleSystem flipParticles;
+    private CharacterMovement movement;
 
     void Start()
     {
         animator = GetComponent<Animator>();
-        hitParticles = GetComponent<ParticleSystem>();
-        audioSource = GetComponent<AudioSource>();
+        flipParticles = GetComponent<ParticleSystem>();
+        movement = GetComponent<CharacterMovement>();
         playerHealth = GetComponent<PlayerHealth>();
     }
 
-    public void GotHit()
+    void Update()
     {
-        if(playerHealth != null){
-            playerHealth.TakeDamage(30);
-            animator.SetTrigger("GotHit");
-            hitParticles.Play();
-            audioSource.Play();
-        }
+        
     }
+    // public void DoFlip()
+    // {
+    //     if(movement.doFlip){
+    //         flipParticles.Play();
+    //     }
+    // }
 }
