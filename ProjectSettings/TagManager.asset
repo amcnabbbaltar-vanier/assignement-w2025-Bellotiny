@@ -4,7 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Boost
+  - SpeedBoost
+  - JumpBoost
+  - ScorePickup
   layers:
   - Default
   - TransparentFX
