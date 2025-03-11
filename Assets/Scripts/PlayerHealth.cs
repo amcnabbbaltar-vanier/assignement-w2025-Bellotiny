@@ -26,7 +26,7 @@ public class PlayerHealth : MonoBehaviour
 
     void Die(){
         if(GameManager.Instance != null){
-            GameManager.Instance.IncrementScore();
+            //GameManager.Instance.IncrementScore();
             GameManager.Instance.LoadNextScene();
         }
     }

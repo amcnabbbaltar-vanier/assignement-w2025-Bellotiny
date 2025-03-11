@@ -5,8 +5,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
     public int score = 0;
-    public int targetScore = 4; // Score to reach before changing scenes
-
+    //public int targetScore = 4; // Score to reach before changing scenes
+    public float timer = 0.0f;
     void Awake()
     {
         // Singleton pattern
@@ -21,15 +21,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void IncrementScore()
+    public void IncrementScore(int pickUpPoints)
     {
-        score++;
+        score += pickUpPoints;
         Debug.Log("Score: " + score);
 
-        if (score >= targetScore)
-        {
-            LoadNextScene();
-        }
+        // if (score >= targetScore)
+        // {
+        //     LoadNextScene();
+        // }
     }
 
     public void LoadNextScene()
