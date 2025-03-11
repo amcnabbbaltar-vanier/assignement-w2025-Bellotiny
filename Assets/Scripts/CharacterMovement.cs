@@ -108,12 +108,12 @@ public class CharacterMovement : MonoBehaviour
         if (Input.GetButtonDown("Jump"))
         {
             jumpRequest = true;
-            // if (Input.GetButtonDown("Jump"))
-            // {
-            //     flipRequest = true;
-            // }
         }
 
+        if (Input.GetKeyDown(KeyCode.Space) && doFlip)
+        {
+            flipRequest = true;
+        }
         
     }
 
@@ -171,11 +171,12 @@ public class CharacterMovement : MonoBehaviour
             jumpRequest = false; // Reset jump request after applying jump
         }
 
-        // if (flipRequest)
-        // {
-        //     rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse); // Apply force upwards
-        //     flipRequest = false; // Reset jump request after applying jump
-        // }
+        if (flipRequest && IsGrounded)
+        {
+            // Apply flip animation here, or force rotation
+            
+            flipRequest = false;
+        }
     }
 
     /// <summary>
