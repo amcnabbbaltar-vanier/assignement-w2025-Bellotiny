@@ -7,6 +7,9 @@ TagManager:
   - SpeedBoost
   - JumpBoost
   - ScorePickup
+  - Boost
+  - Floor
+  - Trap
   layers:
   - Default
   - TransparentFX

@@ -13,12 +13,13 @@ public class GameOverController : MonoBehaviour
     {
         gameOverPanel.SetActive(true);
         if(GameManager.Instance){
-            scoreText.text = "Score: " + GameManager.Instance.score.ToString();
+            scoreText.text = "Score: " + GameManager.Instance.totalScore.ToString();
         }
     }
 
-    public void RestartGame(){
-        SceneManager.LoadScene(0);
+    public void RestartGame()
+    {
+        SceneManager.LoadScene("Level1Scene");
     }
 
     // Update is called once per frame

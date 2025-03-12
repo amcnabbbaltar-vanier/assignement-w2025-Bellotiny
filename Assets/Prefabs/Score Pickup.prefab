@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 5455411923390270865}
   - component: {fileID: 2191364171592538984}
   - component: {fileID: 7690303804525714771}
+  - component: {fileID: 1040189439420355503}
   m_Layer: 0
   m_Name: Score Pickup
-  m_TagString: Untagged
+  m_TagString: ScorePickup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -133,3 +134,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1040189439420355503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6745752510285367609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1aa0a3605630d12499b779bf240eb6dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 50
+  hoverSpeed: 1
+  hoverHeight: 0.2

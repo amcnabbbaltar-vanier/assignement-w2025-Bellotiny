@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;
 using UnityEngine.SceneManagement; // Add this namespace
 
 public class GameManager : MonoBehaviour
@@ -6,8 +7,9 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     [SerializeField] private GameObject pauseMenuPanel;
     private bool isPaused = false;
-    public int score = 0;
-    //public int targetScore = 4; // Score to reach before changing scenes
+    public TextMeshProUGUI currentScoreText;
+    public int totalScore = 0;
+    public int currentLevelScore = 0;
     public float timer = 0.0f;
     void Awake()
     {
@@ -15,28 +17,40 @@ public class GameManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject); // Optional
+            //DontDestroyOnLoad(gameObject); // Optional
         }
         else
         {
             Destroy(gameObject);
         }
+
+        if (pauseMenuPanel != null)
+        {
+            currentScoreText = pauseMenuPanel.GetComponentInChildren<TextMeshProUGUI>();
+        }
     }
 
     public void IncrementScore(int pickUpPoints)
     {
-        score += pickUpPoints;
-        Debug.Log("Score: " + score);
+        currentLevelScore += pickUpPoints;
+        Debug.Log("Score: " + currentLevelScore);
+    }
 
-        // if (score >= targetScore)
-        // {
-        //     LoadNextScene();
-        // }
+    public void IncrementTotal()
+    {
+        totalScore += currentLevelScore;
+        Debug.Log("Total Score: " + totalScore);
     }
 
     public void LoadNextScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1); // Use your new scene's name
+    }
+
+    public void RestartGame()
+    {
+        totalScore = 0;
+        SceneManager.LoadScene("Level1Scene");
     }
 
     void Update()
@@ -54,6 +68,7 @@ public class GameManager : MonoBehaviour
     public void PauseGame(){
         //Show Pause Menu UI
         pauseMenuPanel.SetActive(true);
+        currentScoreText.text = "Score: " + currentLevelScore.ToString();
         //Freeze game time
         Time.timeScale = 0f;
         //(Optional) Freeze audio
@@ -75,7 +90,5 @@ public class GameManager : MonoBehaviour
         // If you're in the editor, this won't fully work,
         // but in a built application, this will quit the game.
         Application.Quit();
-        // If you have a Main Menu scene, you might do:
-        // SceneManager.LoadScene("MainMenu");
     }
 }

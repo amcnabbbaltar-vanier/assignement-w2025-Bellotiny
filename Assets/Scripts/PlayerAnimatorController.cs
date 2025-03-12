@@ -8,6 +8,9 @@ public class PlayerAnimatorController : MonoBehaviour
     private Animator animator;
     private CharacterMovement movement;
     private Rigidbody rb;
+    private PlayerHealth health;
+    private ParticleSystem hitParticles;
+    public float fallThreshold = -10f;
     private float speedBoostTime = 5.0f;
     private bool isSpeedBoosted = false;
     private float jumpBoostTime = 30.0f;
@@ -18,6 +21,8 @@ public class PlayerAnimatorController : MonoBehaviour
         animator = GetComponent<Animator>();
         movement = GetComponent<CharacterMovement>();
         rb = GetComponent<Rigidbody>();
+        health = GetComponent<PlayerHealth>();
+        hitParticles = GetComponent<ParticleSystem>();
     }
 
     // Update is called once per frame
@@ -27,17 +32,14 @@ public class PlayerAnimatorController : MonoBehaviour
         animator.SetBool("IsGrounded", movement.IsGrounded);
         animator.SetBool("doFlip", isJumpBoostActive);
 
-        if (animator == null)
+        if (transform.position.y < fallThreshold)
         {
-            Debug.LogError("Animator is not assigned.");
-        }
-        if (movement == null)
-        {
-            Debug.LogError("CharacterMovement is not assigned.");
-        }
-        if (rb == null)
-        {
-            Debug.LogError("Rigidbody is not assigned.");
+            Debug.Log("Player fell off!");
+            health.TakeDamage(1);
+            if (GameManager.Instance != null){
+                GameManager.Instance.currentLevelScore = 0;
+            }
+
         }
 
         if (isSpeedBoosted)
@@ -62,26 +64,54 @@ public class PlayerAnimatorController : MonoBehaviour
 
     void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.tag == "SpeedBoost")
+        var mainModule = hitParticles.main;
+
+        if (other.gameObject.CompareTag("SpeedBoost"))
         {
+            mainModule.startColor = new ParticleSystem.MinMaxGradient(Color.Lerp(Color.red, Color.yellow, 0.5f)); // Orange
+            hitParticles.Play();
             Destroy(other.gameObject);
             isSpeedBoosted = true;
             movement.speedMultiplier = 2.0f;
             speedBoostTime = 5.0f;
         }
-        if (other.gameObject.tag == "JumpBoost")
+        else if (other.gameObject.CompareTag("JumpBoost"))
         {
+            mainModule.startColor = new ParticleSystem.MinMaxGradient(Color.blue); // Blue
+            hitParticles.Play();
             Destroy(other.gameObject);
             isJumpBoostActive = true;
             jumpBoostTime = 30.0f;
         }
-        if (other.gameObject.tag == "ScorePickup")
+        else if (other.gameObject.CompareTag("ScorePickup"))
         {
-            if(GameManager.Instance != null){
+            if (GameManager.Instance != null)
+            {
+                mainModule.startColor = new ParticleSystem.MinMaxGradient(Color.green); // Green
+                hitParticles.Play();
                 GameManager.Instance.IncrementScore(50);
-                // scoreText.text = ("Score  = " + score);
                 Destroy(other.gameObject);
-            }else{
+            }
+            else
+            {
+                Debug.LogError("GameManager is not instantiated.");
+            }
+        }
+        else if (other.gameObject.CompareTag("Trap"))
+        {
+            mainModule.startColor = new ParticleSystem.MinMaxGradient(Color.red); // Green
+            //hitParticles.Play();
+            health.TakeDamage(1);
+        }
+        else if (other.gameObject.CompareTag("Finish"))
+        {
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.IncrementTotal();
+                GameManager.Instance.LoadNextScene();
+            }
+            else
+            {
                 Debug.LogError("GameManager is not instantiated.");
             }
         }

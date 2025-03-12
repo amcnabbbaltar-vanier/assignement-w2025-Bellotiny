@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public int maxHealth = 100;
+    public int maxHealth = 3;
     private int currentHealth;
     public Slider healthbar;
     // Start is called before the first frame update
@@ -24,10 +24,9 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    void Die(){
+    public void Die(){
         if(GameManager.Instance != null){
-            //GameManager.Instance.IncrementScore();
-            GameManager.Instance.LoadNextScene();
+            GameManager.Instance.RestartGame();
         }
     }
 
