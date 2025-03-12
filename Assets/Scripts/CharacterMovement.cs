@@ -45,7 +45,9 @@ public class CharacterMovement : MonoBehaviour
     /// Checks if the player is currently holding the "Run" button.
     /// </summary>
     private bool IsRunning => Input.GetButton("Run");
-    public bool doFlip;
+    public bool doFlip = false;
+    private AudioSource audioSource;
+    public AudioClip flipSound;
 
     // ============================== Unity Built-in Methods ==============================
 
@@ -85,6 +87,7 @@ public class CharacterMovement : MonoBehaviour
         rb.freezeRotation = true; // Prevent Rigidbody from rotating due to physics interactions
         rb.interpolation = RigidbodyInterpolation.Interpolate; // Smooth physics interpolation
 
+        audioSource = GetComponent<AudioSource>();
         // Assign the main camera if available
         if (Camera.main)
             cameraTransform = Camera.main.transform;
@@ -171,10 +174,17 @@ public class CharacterMovement : MonoBehaviour
             jumpRequest = false; // Reset jump request after applying jump
         }
 
-        if (flipRequest && IsGrounded)
+        if (flipRequest)
         {
-            // Apply flip animation here, or force rotation
-            
+            // if (audioSource != null && flipSound != null)
+            // {
+            //     audioSource.PlayOneShot(flipSound);
+            // }
+            // else
+            // {
+            //     Debug.LogError("AudioSource or FlipSound is missing.");
+            // }
+                
             flipRequest = false;
         }
     }
@@ -214,4 +224,17 @@ public class CharacterMovement : MonoBehaviour
         // Apply the new velocity directly
         rb.velocity = newVelocity;
     }
+
+    public void PlayFlipSound()
+{
+    if (audioSource != null && flipSound != null)
+    {
+        audioSource.PlayOneShot(flipSound);
+    }
+    else
+    {
+        Debug.LogError("AudioSource or FlipSound is missing.");
+    }
+}
+
 }

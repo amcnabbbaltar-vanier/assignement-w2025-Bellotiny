@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     [SerializeField] private GameObject pauseMenuPanel;
     private bool isPaused = false;
-    public TextMeshProUGUI currentScoreText;
+    //public TextMeshProUGUI currentScoreText;
     public int totalScore = 0;
     public int currentLevelScore = 0;
     public float timer = 0.0f;
@@ -24,10 +24,10 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if (pauseMenuPanel != null)
-        {
-            currentScoreText = pauseMenuPanel.GetComponentInChildren<TextMeshProUGUI>();
-        }
+        // if (pauseMenuPanel != null)
+        // {
+        //     currentScoreText = pauseMenuPanel.GetComponentInChildren<TextMeshProUGUI>();
+        // }
     }
 
     public void IncrementScore(int pickUpPoints)
@@ -68,7 +68,7 @@ public class GameManager : MonoBehaviour
     public void PauseGame(){
         //Show Pause Menu UI
         pauseMenuPanel.SetActive(true);
-        currentScoreText.text = "Score: " + currentLevelScore.ToString();
+        // currentScoreText.text = "Score: " + currentLevelScore.ToString();
         //Freeze game time
         Time.timeScale = 0f;
         //(Optional) Freeze audio

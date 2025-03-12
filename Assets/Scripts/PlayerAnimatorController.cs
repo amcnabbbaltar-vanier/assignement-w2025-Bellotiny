@@ -9,7 +9,7 @@ public class PlayerAnimatorController : MonoBehaviour
     private CharacterMovement movement;
     private Rigidbody rb;
     private PlayerHealth health;
-    private ParticleSystem hitParticles;
+    public ParticleSystem hitParticles;
     public float fallThreshold = -10f;
     private float speedBoostTime = 5.0f;
     private bool isSpeedBoosted = false;
@@ -31,6 +31,7 @@ public class PlayerAnimatorController : MonoBehaviour
         animator.SetFloat("CharacterSpeed", rb.velocity.magnitude);
         animator.SetBool("IsGrounded", movement.IsGrounded);
         animator.SetBool("doFlip", isJumpBoostActive);
+        movement.doFlip = isJumpBoostActive;
 
         if (transform.position.y < fallThreshold)
         {
