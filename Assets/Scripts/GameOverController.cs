@@ -12,9 +12,10 @@ public class GameOverController : MonoBehaviour
     void Start()
     {
         gameOverPanel.SetActive(true);
-        if(GameManager.Instance){
-            scoreText.text = "Score: " + GameManager.Instance.totalScore.ToString();
-        }
+        int minutes = Mathf.FloorToInt(GameManager.Instance.timer / 60);
+        int seconds = Mathf.FloorToInt(GameManager.Instance.timer % 60);
+    
+        scoreText.text = $"Time: {minutes:00}:{seconds:00}\nScore: {GameManager.Instance.totalScore}";
     }
 
     public void RestartGame()

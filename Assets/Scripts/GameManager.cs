@@ -1,6 +1,6 @@
 using UnityEngine;
 using TMPro;
-using UnityEngine.SceneManagement; // Add this namespace
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     //public TextMeshProUGUI currentScoreText;
     public int totalScore = 0;
     public int currentLevelScore = 0;
+    private bool gameRunning = false;
     public float timer = 0.0f;
     void Awake()
     {
@@ -53,8 +54,22 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene("Level1Scene");
     }
 
+    public void RestartLevel()
+    {
+        currentLevelScore = 0;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
     void Update()
     {
+        if (!gameRunning && SceneManager.GetActiveScene().buildIndex >= 2) 
+        {
+            gameRunning = true;
+        }
+        if(gameRunning && !isPaused){
+            timer += Time.deltaTime;
+        }
+
         if(Input.GetKeyDown(KeyCode.Escape)){
             if(isPaused){
                 ResumeGame();

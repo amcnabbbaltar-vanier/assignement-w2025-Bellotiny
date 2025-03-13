@@ -44,7 +44,7 @@ public class CharacterMovement : MonoBehaviour
     /// <summary>
     /// Checks if the player is currently holding the "Run" button.
     /// </summary>
-    private bool IsRunning => Input.GetButton("Run");
+    private bool IsRunning = false;
     public bool doFlip = false;
     private AudioSource audioSource;
     public AudioClip flipSound;
@@ -117,6 +117,12 @@ public class CharacterMovement : MonoBehaviour
         {
             flipRequest = true;
         }
+
+        if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
+        {
+            IsRunning = !IsRunning;
+        }
+
         
     }
 

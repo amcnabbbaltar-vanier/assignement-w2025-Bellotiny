@@ -11,9 +11,11 @@ public class MenuController : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void QuitGame(){
+        // If you're in the editor, this won't fully work,
+        // but in a built application, this will quit the game.
+        Application.Quit();
+        // If you have a Main Menu scene, you might do:
+        // SceneManager.LoadScene("MainMenu");
     }
 }

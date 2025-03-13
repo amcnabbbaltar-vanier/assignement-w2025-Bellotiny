@@ -38,7 +38,7 @@ public class PlayerAnimatorController : MonoBehaviour
             Debug.Log("Player fell off!");
             health.TakeDamage(1);
             if (GameManager.Instance != null){
-                GameManager.Instance.currentLevelScore = 0;
+                GameManager.Instance.RestartLevel();
             }
 
         }
