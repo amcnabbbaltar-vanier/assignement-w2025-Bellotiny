@@ -192,6 +192,9 @@ public class CharacterMovement : MonoBehaviour
         
         if (jumpRequest && IsGrounded)
         {
+            Vector3 currentVelocity = rb.velocity; // Get the current velocity
+            float horizontalVelocityFactor = 1.0f; // Modify this to scale the horizontal velocity preservation
+            rb.velocity = new Vector3(currentVelocity.x * horizontalVelocityFactor, 0f, currentVelocity.z * horizontalVelocityFactor);
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse); // Apply force upwards
             //Check first jump
             jumpCount = 1;
@@ -203,7 +206,11 @@ public class CharacterMovement : MonoBehaviour
         }else if (jumpRequest && jumpCount == 1 && doFlip && (Time.time - lastJumpTime) <= jumpTimeWindow)
         {
             // Second jump (Flip)
-            rb.AddForce(Vector3.up * (jumpForce * 0.5f), ForceMode.Impulse); // Higher force for flip
+            Vector3 currentVelocity = rb.velocity; // Get the current velocity
+            float flipHorizontalVelocityFactor = 0.75f; // Scale horizontal velocity on flip jump, if needed
+
+            rb.velocity = new Vector3(currentVelocity.x * flipHorizontalVelocityFactor, 0f, currentVelocity.z * flipHorizontalVelocityFactor);
+            rb.AddForce(Vector3.up * (jumpForce * 0.8f), ForceMode.Impulse); // Higher force for flip
             PlayFlipSound(); // Play sound
             jumpCount = 2;
             isFlipping = true;

@@ -3240,7 +3240,7 @@ PrefabInstance:
       objectReference: {fileID: 8300000, guid: 695b0e5e36c564a40a5c58a52fa7bb74, type: 3}
     - target: {fileID: 5350154158508262512, guid: e3fe52d757dbacb43a943a5d311369b8, type: 3}
       propertyPath: jumpForce
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5350154158508262512, guid: e3fe52d757dbacb43a943a5d311369b8, type: 3}
       propertyPath: rotationSpeed
