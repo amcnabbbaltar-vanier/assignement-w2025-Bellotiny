@@ -2266,11 +2266,11 @@ PrefabInstance:
       objectReference: {fileID: 8300000, guid: 695b0e5e36c564a40a5c58a52fa7bb74, type: 3}
     - target: {fileID: 5350154158508262512, guid: e3fe52d757dbacb43a943a5d311369b8, type: 3}
       propertyPath: jumpForce
-      value: 6.5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5350154158508262512, guid: e3fe52d757dbacb43a943a5d311369b8, type: 3}
       propertyPath: rotationSpeed
-      value: 9
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5350154158508262512, guid: e3fe52d757dbacb43a943a5d311369b8, type: 3}
       propertyPath: freeLookCamera
@@ -8770,6 +8770,10 @@ PrefabInstance:
     - target: {fileID: 6745752510285367609, guid: c3cd058636d0725459730f5817f3d141, type: 3}
       propertyPath: m_Name
       value: Score Pickup
+      objectReference: {fileID: 0}
+    - target: {fileID: 6745752510285367609, guid: c3cd058636d0725459730f5817f3d141, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6745752510285367609, guid: c3cd058636d0725459730f5817f3d141, type: 3}
       propertyPath: m_TagString

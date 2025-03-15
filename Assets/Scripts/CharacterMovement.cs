@@ -4,6 +4,7 @@ using Cinemachine;
 [RequireComponent(typeof(Rigidbody))] // Ensures that a Rigidbody component is attached to the GameObject
 public class CharacterMovement : MonoBehaviour
 {
+    private Animator animator;
     // ============================== Movement Settings ==============================
     [Header("Movement Settings")]
     [SerializeField] private float baseWalkSpeed = 5f;    // Base speed when walking
@@ -14,6 +15,9 @@ public class CharacterMovement : MonoBehaviour
     [Header("Jump Settings")]
     [SerializeField] private float jumpForce = 5f;        // Jump force applied to the character
     [SerializeField] private float groundCheckDistance = 1.1f; // Distance to check for ground contact (Raycast)
+    private int jumpCount = 0; // Tracks the number of jumps
+    private float jumpTimeWindow = 0.8f; // Time window for detecting second jump
+    private float lastJumpTime = 0f;
 
     // ============================== Modifiable from other scripts ==================
     public float speedMultiplier = 1.0f; // Additional multiplier for character speed ( WINK WINK )
@@ -26,7 +30,7 @@ public class CharacterMovement : MonoBehaviour
     private float moveX; // Stores horizontal movement input (A/D or Left/Right Arrow)
     private float moveZ; // Stores vertical movement input (W/S or Up/Down Arrow)
     private bool jumpRequest; // Flag to check if the player requested a jump
-    private bool flipRequest; // Flag to check if the player requested do flip
+    //private bool flipRequest; // Flag to check if the player requested do flip
     private Vector3 moveDirection; // Stores the calculated movement direction
 
     // ============================== Animation Variables ==============================
@@ -40,12 +44,13 @@ public class CharacterMovement : MonoBehaviour
     /// </summary>
     public bool IsGrounded => 
         Physics.Raycast(transform.position + Vector3.up * 0.1f, Vector3.down, groundCheckDistance);
-
+    private bool isInAir = false;
     /// <summary>
     /// Checks if the player is currently holding the "Run" button.
     /// </summary>
     private bool IsRunning = false;
     public bool doFlip = false;
+    private bool isFlipping = false;
     private AudioSource audioSource;
     public AudioClip flipSound;
 
@@ -64,6 +69,12 @@ public class CharacterMovement : MonoBehaviour
     /// </summary>
     private void Update()
     {
+        if (IsGrounded && !isInAir)  // Only reset when we are grounded and was previously in the air
+        {
+            Debug.Log("Resetting jump count and flip after landing.");
+            jumpCount = 0;  // Reset jump count after landing
+            isFlipping = false;  // Stop flip animation when grounded
+        }
         RegisterInput(); // Collect player input
     }
 
@@ -73,6 +84,7 @@ public class CharacterMovement : MonoBehaviour
     private void FixedUpdate()
     {
         HandleMovement(); // Process movement and physics-based updates
+        
     }
 
     // ============================== Initialization ==============================
@@ -83,6 +95,7 @@ public class CharacterMovement : MonoBehaviour
     /// </summary>
     private void InitializeComponents()
     {
+        animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>(); // Get the Rigidbody component
         rb.freezeRotation = true; // Prevent Rigidbody from rotating due to physics interactions
         rb.interpolation = RigidbodyInterpolation.Interpolate; // Smooth physics interpolation
@@ -111,11 +124,6 @@ public class CharacterMovement : MonoBehaviour
         if (Input.GetButtonDown("Jump"))
         {
             jumpRequest = true;
-        }
-
-        if (Input.GetKeyDown(KeyCode.Space) && doFlip)
-        {
-            flipRequest = true;
         }
 
         if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
@@ -174,24 +182,34 @@ public class CharacterMovement : MonoBehaviour
     private void HandleJump()
     {
         // Apply jump force only if jump was requested and the character is grounded
+        if(jumpRequest){
+            Debug.Log("There was a jumpRequest!!!!!!!");
+            Debug.Log("IsGrounded: " + IsGrounded);
+            Debug.Log("isInAir: " + isInAir);
+            Debug.Log("jumpCount: " + jumpCount);
+            Debug.Log("doFlip: " + doFlip);
+        }
+        
         if (jumpRequest && IsGrounded)
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse); // Apply force upwards
+            //Check first jump
+            jumpCount = 1;
+            lastJumpTime = Time.time;
+            isFlipping = false;
+            isInAir = true;
             jumpRequest = false; // Reset jump request after applying jump
-        }
-
-        if (flipRequest)
+            Debug.Log("First jump executed!!!!!!!!!!!!");
+        }else if (jumpRequest && jumpCount == 1 && doFlip && (Time.time - lastJumpTime) <= jumpTimeWindow)
         {
-            // if (audioSource != null && flipSound != null)
-            // {
-            //     audioSource.PlayOneShot(flipSound);
-            // }
-            // else
-            // {
-            //     Debug.LogError("AudioSource or FlipSound is missing.");
-            // }
-                
-            flipRequest = false;
+            // Second jump (Flip)
+            rb.AddForce(Vector3.up * (jumpForce * 0.5f), ForceMode.Impulse); // Higher force for flip
+            PlayFlipSound(); // Play sound
+            jumpCount = 2;
+            isFlipping = true;
+            animator.SetBool("isFlipping", isFlipping);
+            jumpRequest = false;
+            isInAir = false;
         }
     }
 
