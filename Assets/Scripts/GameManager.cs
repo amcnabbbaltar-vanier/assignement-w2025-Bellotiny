@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-        Debug.Log("PauseMenuPanel State: " + (pauseMenuPanel != null ? "Exists" : "Null"));
+        //Debug.Log("PauseMenuPanel State: " + (pauseMenuPanel != null ? "Exists" : "Null"));
         if (pauseMenuPanel != null)
         {
             pauseMenuPanel.SetActive(false);  // Hide at the start
@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
 
         if (newPanel != null && newPanel != pauseMenuPanel)
         {
-            Debug.Log("New PauseMenuPanel found in the scene! Replacing the old one.");
+            //Debug.Log("New PauseMenuPanel found in the scene! Replacing the old one.");
             
             // Destroy the old persistent panel
             Destroy(pauseMenuPanel);
@@ -182,7 +182,7 @@ public class GameManager : MonoBehaviour
     public void PauseGame(){
         if (pauseMenuPanel != null)  // Check if PauseMenuPanel exists
         {
-            Debug.Log("PauseMenuPanel found. Activating pause menu.");
+            //Debug.Log("PauseMenuPanel found. Activating pause menu.");
             pauseMenuPanel.SetActive(true);  // Show Pause Menu
         }
         else

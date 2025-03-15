@@ -71,7 +71,7 @@ public class CharacterMovement : MonoBehaviour
     {
         if (IsGrounded && !isInAir)  // Only reset when we are grounded and was previously in the air
         {
-            Debug.Log("Resetting jump count and flip after landing.");
+            //Debug.Log("Resetting jump count and flip after landing.");
             jumpCount = 0;  // Reset jump count after landing
             isFlipping = false;  // Stop flip animation when grounded
         }
@@ -182,13 +182,13 @@ public class CharacterMovement : MonoBehaviour
     private void HandleJump()
     {
         // Apply jump force only if jump was requested and the character is grounded
-        if(jumpRequest){
-            Debug.Log("There was a jumpRequest!!!!!!!");
-            Debug.Log("IsGrounded: " + IsGrounded);
-            Debug.Log("isInAir: " + isInAir);
-            Debug.Log("jumpCount: " + jumpCount);
-            Debug.Log("doFlip: " + doFlip);
-        }
+        // if(jumpRequest){
+        //     Debug.Log("There was a jumpRequest!!!!!!!");
+        //     Debug.Log("IsGrounded: " + IsGrounded);
+        //     Debug.Log("isInAir: " + isInAir);
+        //     Debug.Log("jumpCount: " + jumpCount);
+        //     Debug.Log("doFlip: " + doFlip);
+        // }
         
         if (jumpRequest && IsGrounded)
         {
@@ -202,7 +202,7 @@ public class CharacterMovement : MonoBehaviour
             isFlipping = false;
             isInAir = true;
             jumpRequest = false; // Reset jump request after applying jump
-            Debug.Log("First jump executed!!!!!!!!!!!!");
+            //Debug.Log("First jump executed!!!!!!!!!!!!");
         }else if (jumpRequest && jumpCount == 1 && doFlip && (Time.time - lastJumpTime) <= jumpTimeWindow)
         {
             // Second jump (Flip)
