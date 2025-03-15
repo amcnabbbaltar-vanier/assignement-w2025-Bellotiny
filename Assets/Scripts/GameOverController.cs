@@ -12,15 +12,26 @@ public class GameOverController : MonoBehaviour
     void Start()
     {
         gameOverPanel.SetActive(true);
-        int minutes = Mathf.FloorToInt(GameManager.Instance.timer / 60);
-        int seconds = Mathf.FloorToInt(GameManager.Instance.timer % 60);
-    
-        scoreText.text = $"Time: {minutes:00}:{seconds:00}\nScore: {GameManager.Instance.totalScore}";
+        if(GameManager.Instance != null){
+            int minutes = Mathf.FloorToInt(GameManager.Instance.timer / 60);
+            int seconds = Mathf.FloorToInt(GameManager.Instance.timer % 60);
+        
+            scoreText.text = $"Time: {minutes:00}:{seconds:00}\nScore: {GameManager.Instance.totalScore}";
+        }
+        else
+            {
+                Debug.LogError("GameManager is not instantiated.");
+            }
     }
 
     public void RestartGame()
     {
-        SceneManager.LoadScene("Level1Scene");
+        if(GameManager.Instance != null){
+            GameManager.Instance.RestartGame();
+        }else
+            {
+                Debug.LogError("GameManager is not instantiated.");
+            }
     }
 
     // Update is called once per frame
