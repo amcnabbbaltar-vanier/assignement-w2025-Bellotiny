@@ -91,8 +91,8 @@ public class GameManager : MonoBehaviour
             // Assign the button functions to the respective methods
             if(resumeButton != null && restartButton != null && quitButton != null){
                 resumeButton.onClick.AddListener(ResumeGame);
-                restartButton.onClick.AddListener(RestartGame);
-                quitButton.onClick.AddListener(QuitGame);
+                restartButton.onClick.AddListener(RestartLevel);
+                quitButton.onClick.AddListener(QuitToMenu);
             }else{
                 Debug.Log("No buttons were found");
             }
@@ -152,7 +152,7 @@ public class GameManager : MonoBehaviour
                 }
                 else
                 {
-                    Debug.LogWarning("PauseMenuPanel not found in the scene!");
+                    //Debug.LogWarning("PauseMenuPanel not found in the scene!");
                 }
             }
         if (!gameRunning && SceneManager.GetActiveScene().buildIndex >= 2 && SceneManager.GetActiveScene().buildIndex < SceneManager.sceneCountInBuildSettings - 1) 
@@ -203,6 +203,18 @@ public class GameManager : MonoBehaviour
         //(Optional) Unfreeze audio
         //Audiolistener.pause = false;
         isPaused = false;
+    }
+
+    public void QuitToMenu(){
+        totalScore = 0;
+        currentLevelScore = 0;
+        timer = 0.0f;
+        gameRunning = false;
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
+        SceneManager.LoadScene("MainScene");
     }
 
     public void QuitGame(){

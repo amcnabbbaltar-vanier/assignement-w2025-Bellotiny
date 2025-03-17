@@ -1032,7 +1032,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5977346570128039978, guid: c3cd058636d0725459730f5817f3d141, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.30000025
+      value: 0.47
       objectReference: {fileID: 0}
     - target: {fileID: 5977346570128039978, guid: c3cd058636d0725459730f5817f3d141, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1405,7 +1405,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5977346570128039978, guid: c3cd058636d0725459730f5817f3d141, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.3000005
+      value: 0.47
       objectReference: {fileID: 0}
     - target: {fileID: 5977346570128039978, guid: c3cd058636d0725459730f5817f3d141, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1703,7 +1703,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4139122084605248857, guid: 6b145df202d1d774fa28178f6a599fa3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.30000025
+      value: 0.47
       objectReference: {fileID: 0}
     - target: {fileID: 4139122084605248857, guid: 6b145df202d1d774fa28178f6a599fa3, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2215,7 +2215,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5977346570128039978, guid: c3cd058636d0725459730f5817f3d141, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.30000097
+      value: 0.47
       objectReference: {fileID: 0}
     - target: {fileID: 5977346570128039978, guid: c3cd058636d0725459730f5817f3d141, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3007,7 +3007,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Fight Clup
+  m_text: Fight Club
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -8673,7 +8673,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5977346570128039978, guid: c3cd058636d0725459730f5817f3d141, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.30000025
+      value: 0.47
       objectReference: {fileID: 0}
     - target: {fileID: 5977346570128039978, guid: c3cd058636d0725459730f5817f3d141, type: 3}
       propertyPath: m_LocalPosition.z
@@ -8902,7 +8902,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4139122084605248857, guid: 6b145df202d1d774fa28178f6a599fa3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.3
+      value: 0.47
       objectReference: {fileID: 0}
     - target: {fileID: 4139122084605248857, guid: 6b145df202d1d774fa28178f6a599fa3, type: 3}
       propertyPath: m_LocalPosition.z
